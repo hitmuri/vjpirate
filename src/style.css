@@ -1,5 +1,67 @@
-body {
-  margin: 0px;
-  background-color: #00FF5D;
-  overflow: hidden;
+html {
+    width:100%;
+    height:100%;
 }
+
+body {
+    margin: 0px;
+    background-color: #FFFFFF;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    color:white;
+    font-weight:bold;
+    font-family:Arial;
+}
+
+
+#grids {
+    height:20%;
+    width:100%;
+    background-color:black;
+    color:white;
+    border-bottom : 1px solid white;
+}
+
+#preview {
+    margin:0px;
+    padding:0px;
+    float:right;
+    width:80%;
+    height:60%;
+    border-left:1px solid white;
+}
+
+#parameters {
+    width:20%;
+    height:60%;
+    background-color:black;
+}
+
+#parameters ul {
+    padding-left:10px;
+}
+
+#parameters li {
+    list-style-type:none;
+}
+
+.control {
+    text-decoration:none;
+    color:white;
+    padding:5px;
+    border:1px solid white;
+}
+
+.active {
+    background-color:white;
+    color:black;
+}
+
+#loops{
+    width:100%;
+    height:20%;
+    background-color:black;
+    border-top:1px solid white;
+}
+

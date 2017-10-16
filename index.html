@@ -3,10 +3,22 @@
     <head>
         <title>VjPirate</title>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-        <link rel="stylesheet" href="data/style.css"/>
+        <link rel="stylesheet" href="src/style.css"/>
     </head>
     <body>
+
+        <div id="grids">Grids</div>
+        <div id="preview"></div>
+        <div id="parameters">
+            <div>Parameters</div>
+            <ul>
+                <li><a class="control active" id="grid-active" href="#" onClick="gridActive()">Active</a></li>
+            </ul>
+
+        
+        </div>
+        <div id="loops">Loops</div>
+
         <script src="node_modules/three/build/three.js"></script>
         <script src="node_modules/osc/dist/osc-browser.min.js"></script>
         <script src="node_modules/osc/dist/osc-chromeapp.min.js"></script>

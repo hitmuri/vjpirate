@@ -1,26 +1,3 @@
-/***************************************************************************
- *  exprsui.js
- *  Part of ExprSUI
- *  2017-  Florent Berthaut
- *  hitmuri.net
- ****************************************************************************/
-/*
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
- *  (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
- */
-
-var camera, scene, renderer;
 
 //OSC
 var port = new osc.WebSocketPort({
@@ -37,48 +14,70 @@ port.on("ready", function() {
 
 port.open();
 
-init();
-animate();
+var camera, scene, renderer;
+var preview;
+var grids = [];
+var curGrid=undefined;
 
-function Grille() {
+function Grid() {
     this.node = new THREE.Object3D();
+    this.geom = new THREE.PlaneGeometry(100, 100);
+    this.mtl = new THREE.MeshBasicMaterial({color: 0xffffff});
+    this.cube = new THREE.Mesh(this.geom, this.mtl);
+    this.node.add(this.cube);
+}
 
+function gridActive() {
+    curGrid.node.visible=!curGrid.node.visible;
+    var but = document.getElementById("grid-active");
+    if(curGrid.node.visible) {
+        but.classList.add("active");
+    }
+    else {
+        but.classList.remove("active");
+    }
 }
 
 function init() {
-
+    preview  = document.getElementById("preview");
 
 //CAMERA
-    camera = new THREE.OrthographicCamera(window.innerWidth/window.innerHeight,
-                                          10, 100000);
-    camera.position.z = 1000;
+    camera = new THREE.OrthographicCamera(-preview.clientWidth/2,
+                                          preview.clientWidth/2,
+                                          preview.clientHeight/2,
+                                          -preview.clientHeight/2,
+                                          1, 10000);
+    camera.position.z = 10;
 
 //SCENE
     scene = new THREE.Scene();
 
-    var light = new THREE.PointLight(0xffffff, 2.5, 10000, 10);
-    light.position.set(0,0,1000);
-    scene.add(light);
-
-
-
+    var newGrid = new Grid();
+    scene.add(newGrid.node);
+    grids.push(newGrid);
+    curGrid = newGrid;
 
 //RENDERER
     renderer = new THREE.WebGLRenderer({antialias:true});
     renderer.setPixelRatio(window.devicePixelRatio);
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setSize(preview.clientWidth, preview.clientHeight);
     renderer.setClearColor(0x000000);
-    document.body.appendChild(renderer.domElement);
+    preview.appendChild(renderer.domElement);
     window.addEventListener('resize', onWindowResize, false);
 }
 
 function onWindowResize() {
-    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.aspect = preview.clientWidth / preview.clientHeight;
     camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setSize(preview.clientWidth, preview.clientHeight);
 }
 
 function animate() {
     requestAnimationFrame(animate);
     renderer.render(scene, camera);
 }
+
+init();
+animate();
+
+
