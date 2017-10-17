@@ -1,6 +1,23 @@
 {
     "name": "VjPirate",
     "version": "1.0.0",
+    "main": "index.html",
+    "window": {
+        "toolbar": true
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "dist": "build --tasks win-x86,win-x64,linux-x86,linux-x64,mac-x64 --mirror https://dl.nwjs.io/ .",
+        "start": "run --x64 --mirror https://dl.nwjs.io/ ."
+    },
+    "build": {
+        "nwVersion": "0.14.7"
+    },
+    "author": "Florent Berthaut & Damien Arnaud",
+    "license": "GPL",
+    "devDependencies": {
+        "nwjs-builder-phoenix": "^1.14.2"
+    },
     "dependencies": {
         "three": ""
     }
