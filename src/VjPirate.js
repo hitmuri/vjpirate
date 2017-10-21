@@ -21,10 +21,10 @@ function VjPirate() {
 
     //CAMERA
     this.camera = new THREE.OrthographicCamera(-this.preview.clientWidth/2,
-                                              this.preview.clientWidth/2,
-                                              this.preview.clientHeight/2,
-                                              -this.preview.clientHeight/2,
-                                              1, 10000);
+                                               this.preview.clientWidth/2,
+                                               this.preview.clientHeight/2,
+                                               -this.preview.clientHeight/2,
+                                               1, 10000);
     this.camera.position.z = 10;
 
     //SCENE

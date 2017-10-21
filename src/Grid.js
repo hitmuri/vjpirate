@@ -11,5 +11,11 @@ function Grid() {
     this.isVisible = function() {
         return this.node.visible;
     }
+
+    this.setColumns = function(cols) {
+        
+
+    }
+
 }
 
