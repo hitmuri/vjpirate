@@ -2,6 +2,11 @@
     "name": "VjPirate",
     "version": "1.0.0",
     "main": "index.html",
+    "dependencies": {
+        "three": "",
+        "osc": "",
+        "ws": ""
+    },
     "window": {
         "toolbar": true
     },
@@ -17,9 +22,6 @@
     "license": "GPL",
     "devDependencies": {
         "nwjs-builder-phoenix": "^1.14.2"
-    },
-    "dependencies": {
-        "three": ""
     }
 }
 

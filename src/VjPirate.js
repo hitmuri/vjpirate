@@ -2,6 +2,7 @@
 function VjPirate() {
     this.grids = [];
 
+
     this.gridActive = function() {
         this.curGrid.setVisible(!this.curGrid.isVisible());
         var but = document.getElementById("grid-active");
@@ -14,16 +15,26 @@ function VjPirate() {
     }
 
     this.gridCols = function() {
-        console.log("blup");
+        var colsSli = document.getElementById("grid-cols");
+        this.curGrid.setColumns(colsSli.value/100);
+    }
+
+    this.gridRows = function() {
+        var rowsSli = document.getElementById("grid-rows");
+        this.curGrid.setRows(rowsSli.value/100);
+    }
+
+    this.gridSize = function() {
+        var colsSli = document.getElementById("grid-size");
+        this.curGrid.setSize(sizeSli.value/100);
     }
 
     this.preview  = document.getElementById("preview");
+    this.width = this.preview.clientWidth;
+    this.height =this.preview.clientHeight;
 
     //CAMERA
-    this.camera = new THREE.OrthographicCamera(-this.preview.clientWidth/2,
-                                               this.preview.clientWidth/2,
-                                               this.preview.clientHeight/2,
-                                               -this.preview.clientHeight/2,
+    this.camera = new THREE.OrthographicCamera(-0.5, 0.5, 0.5, -0.5,
                                                1, 10000);
     this.camera.position.z = 10;
 
@@ -34,6 +45,7 @@ function VjPirate() {
     this.scene.add(newGrid.node);
     this.grids.push(newGrid);
     this.curGrid = newGrid;
+    this.curGrid.setColumns(3);
 
     //RENDERER
     this.renderer = new THREE.WebGLRenderer({antialias:true});
@@ -43,11 +55,11 @@ function VjPirate() {
     this.preview.appendChild(this.renderer.domElement);
 
     this.onWindowResize = function() {
+        this.renderer.setSize(this.preview.clientWidth, 
+                              this.preview.clientHeight);
         this.camera.aspect = this.preview.clientWidth 
                              / this.preview.clientHeight;
         this.camera.updateProjectionMatrix();
-        this.renderer.setSize(this.preview.clientWidth, 
-                              this.preview.clientHeight);
     }
 
     window.addEventListener('resize', this.onWindowResize.bind(this), false);
