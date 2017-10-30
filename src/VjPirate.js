@@ -44,6 +44,10 @@ function VjPirate() {
     this.grids.push(newGrid);
     this.curGrid = newGrid;
 
+
+    //INPUT 
+    this.input = new InputManager();
+
     //RENDERER
     var preview  = document.getElementById("preview");
     this.renderer = new THREE.WebGLRenderer({antialias:true});
@@ -66,6 +70,7 @@ function VjPirate() {
     this.animate = function() {
         requestAnimationFrame(this.animate.bind(this));
         this.renderer.render(this.scene, this.camera);
+        this.input.process();
     }
 
     this.animate();
