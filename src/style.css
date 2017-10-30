@@ -1,19 +1,21 @@
 html {
     height:100%;
+    width:100%;
 }
 
 body {
     height:100%;
+    width:100%;
     margin: 0px;
     background-color: #FFFFFF;
     color:white;
     font-weight:bold;
     font-family:Arial;
     display:grid;
-    grid: [row1-start] "grids grids grids" 100px [row1-end] 
-          [row2-start] "preview preview parameters" auto [row2-end]
-          [row3-start] "loops loops loops" 100px [row3-end] 
-          / auto auto auto;
+    grid: [row1-start] "grids grids" 100px [row1-end] 
+          [row2-start] "preview parameters" auto [row2-end]
+          [row3-start] "loops loops" 100px [row3-end] 
+          / auto 300px;
 }
 
 #grids {

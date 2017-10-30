@@ -29,9 +29,6 @@ function VjPirate() {
         this.curGrid.setSize(sizeSli.value/100);
     }
 
-    this.preview  = document.getElementById("preview");
-    this.width = this.preview.clientWidth;
-    this.height =this.preview.clientHeight;
 
     //CAMERA
     this.camera = new THREE.OrthographicCamera(-0.5, 0.5, 0.5, -0.5,
@@ -41,24 +38,26 @@ function VjPirate() {
     //SCENE
     this.scene = new THREE.Scene();
 
+    //first grid
     var newGrid = new Grid();
     this.scene.add(newGrid.node);
     this.grids.push(newGrid);
     this.curGrid = newGrid;
-    this.curGrid.setColumns(3);
 
     //RENDERER
+    var preview  = document.getElementById("preview");
     this.renderer = new THREE.WebGLRenderer({antialias:true});
     this.renderer.setPixelRatio(window.devicePixelRatio);
-    this.renderer.setSize(this.preview.clientWidth, this.preview.clientHeight);
+    this.renderer.setSize(preview.clientWidth, preview.clientHeight);
     this.renderer.setClearColor(0x000000);
-    this.preview.appendChild(this.renderer.domElement);
+    preview.appendChild(this.renderer.domElement);
 
     this.onWindowResize = function() {
-        this.renderer.setSize(this.preview.clientWidth, 
-                              this.preview.clientHeight);
-        this.camera.aspect = this.preview.clientWidth 
-                             / this.preview.clientHeight;
+        var preview  = document.getElementById("preview");
+        this.renderer.setSize(preview.clientWidth, 
+                              preview.clientHeight);
+        this.camera.aspect = preview.clientWidth 
+                             / preview.clientHeight;
         this.camera.updateProjectionMatrix();
     }
 

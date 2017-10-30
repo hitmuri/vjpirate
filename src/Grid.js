@@ -15,7 +15,7 @@ function GridParameter() {
 
 
 function Grid() {
-    this.gridSize = 30;
+    this.gridSize = 10;
     this.node = new THREE.Object3D();
     this.geom = new THREE.PlaneBufferGeometry(1, 1);
     this.mtl = new THREE.MeshBasicMaterial({color: 0xffffff});
@@ -25,8 +25,8 @@ function Grid() {
         this.node.add(this.cells[c]);
         this.cells[c].visible=true;
     }
-    this.nbCols=1;
-    this.nbRows=1;
+    this.nbCols=0;
+    this.nbRows=0;
     this.size=new GridParameter();
     this.size.value=0.5;
     //FIXME temp
@@ -40,22 +40,24 @@ function Grid() {
     }
 
     this.setColumns = function(cols) {
-        this.nbCols=(cols>0)?cols*this.gridSize:1;
+        this.nbCols=Math.floor(cols*(this.gridSize-1))+1;
         this.updateGrid();
     }
     this.getColumns = function() {
         return this.nbCols;
     }
     this.setRows = function(rows) {
-        this.nbRows=(rows>0)?rows*this.gridSize:1;
+        this.nbRows=Math.floor(rows*(this.gridSize-1))+1;
         this.updateGrid();
     }
     this.getRows = function() {
         return this.nbRows;
     }
     this.setSize = function(size) {
-        this.size.value=size;
-        this.updateGrid();
+        if(size!=this.size.value) {
+            this.size.value=size;
+            this.updateGrid();
+        }
     }
     this.getSize = function() {
         return this.size.value;
@@ -83,6 +85,8 @@ function Grid() {
             }
         }
     }
-    this.updateGrid();
+    this.setColumns(0);
+    this.setRows(0);
+    this.setSize(0.5);
 }
 
