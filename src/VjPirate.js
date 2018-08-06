@@ -1,4 +1,3 @@
-
 function VjPirate() {
     this.grids = [];
 
@@ -47,6 +46,9 @@ function VjPirate() {
 
     //INPUT 
     this.input = new InputManager();
+
+    //TEMP FIXME
+    this.input.addMapping("loudness", this.curGrid.setSize.bind(this.curGrid));
 
     //RENDERER
     var preview  = document.getElementById("preview");
