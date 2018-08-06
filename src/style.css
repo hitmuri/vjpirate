@@ -13,9 +13,10 @@ body {
     font-family:Arial;
     display:grid;
     grid: [row1-start] "grids grids" 100px [row1-end] 
-          [row2-start] "preview parameters" auto [row2-end]
+          [row2-start] "preview parameters" 1fr [row2-end]
           [row3-start] "loops loops" 100px [row3-end] 
-          / auto 300px;
+          / 1fr 300px;
+    overflow:hidden;
 }
 
 #grids {
